@@ -33,7 +33,7 @@ export default function PasswordResetScreen() {
 				<View style={[styles.container, {backgroundColor: theme.colors.background}]}>
 					<View style={styles.logoContainer}>
 						<Image
-							source={require('../assets/images/logo-white.png')}
+							source={theme.logoSource}
 							style={styles.logo}
 							resizeMode="contain"
 						/>

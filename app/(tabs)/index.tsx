@@ -269,11 +269,13 @@ export default function DashboardScreen() {
 								</Text>
 								<Chip
 									style={{
-										backgroundColor: getStatusBackgroundColor(transaction.status),
+										backgroundColor: theme.colors.surface,
 										height: 30,
 										paddingHorizontal: 0,
 										paddingVertical: 0,
-										marginTop: 5
+										marginTop: 5,
+										borderColor: getStatusBackgroundColor(transaction.status),
+										border: '2px'
 									}}
 								>
 									<Text style={{color: getStatusColor(transaction.status), fontSize: 10}}>

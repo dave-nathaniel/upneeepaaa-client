@@ -7,19 +7,19 @@ const darkTheme = {
 	...DefaultTheme,
 	colors: {
 		...DefaultTheme.colors,
-		primary: '#ffd33d', // Yellow primary color
+		primary: '#f69221', // Yellow primary color
 		accent: '#25292e',  // Dark accent color
 		background: '#25292e', // Dark background
 		text: '#ffffff',    // White text
 		surface: '#333333', // Dark surface
 		error: '#ff6b6b',   // Red for errors
 		success: '#51cf66', // Green for success
-		warning: '#fcc419', // Yellow for warnings
+		warning: '#faa124', // Yellow for warnings
 		info: '#339af0',    // Blue for info
 		onSurface: '#ffffff', // White text on surface
 		placeholder: '#aaaaaa', // Light gray for placeholders
 		backdrop: '#1a1a1a', // Darker background for modals
-		notification: '#ffd33d', // Notification color
+		notification: '#f69221', // Notification color
 		disabled: '#666666', // Disabled color
 		// Custom colors for text inputs in dark mode
 		textInputBackground: '#444444', // Lighter background for text inputs
@@ -35,7 +35,7 @@ const lightTheme = {
 	...DefaultTheme,
 	colors: {
 		...DefaultTheme.colors,
-		primary: '#ffd33d', // Yellow primary color
+		primary: '#f69221', // Yellow primary color
 		accent: '#ffffff',  // White accent color
 		background: '#ffffff', // White background
 		text: '#25292e',    // Dark text
@@ -56,6 +56,7 @@ interface ThemeContextType {
 	theme: typeof darkTheme;
 	isDarkMode: boolean;
 	toggleTheme: () => void;
+	logoSource: any; // Add logo source property
 }
 
 export const ThemeContext = createContext<ThemeContextType>({
@@ -63,6 +64,7 @@ export const ThemeContext = createContext<ThemeContextType>({
 	isDarkMode: true,
 	toggleTheme: () => {
 	},
+	logoSource: require('../../assets/images/logo-white.png'),
 });
 
 // Create a hook to use the theme context
@@ -79,12 +81,17 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({children}) => {
 	// Use either dark or light theme based on isDarkMode state
 	const currentTheme = isDarkMode ? darkTheme : lightTheme;
 
+	// Use appropriate logo based on theme
+	const logoSource = isDarkMode 
+		? require('../../assets/images/logo-white.png') 
+		: require('../../assets/images/logo-dark.png');
+
 	const toggleTheme = () => {
 		setIsDarkMode(!isDarkMode);
 	};
 
 	return (
-		<ThemeContext.Provider value={{theme: currentTheme, isDarkMode, toggleTheme}}>
+		<ThemeContext.Provider value={{theme: currentTheme, isDarkMode, toggleTheme, logoSource}}>
 			<PaperProvider theme={currentTheme}>
 				<StatusBar style={isDarkMode ? 'light' : 'dark'}/>
 				{children}
