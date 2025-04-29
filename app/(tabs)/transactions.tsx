@@ -72,7 +72,7 @@ export default function TransactionsScreen() {
 	const getStatusColor = (status) => {
 		switch (status?.toLowerCase()) {
 			case 'completed':
-			case 'success':
+			case 'successful':
 				return theme.colors.success;
 			case 'pending':
 				return theme.colors.warning;
@@ -155,11 +155,16 @@ export default function TransactionsScreen() {
 						<Chip
 							style={{
 								backgroundColor: getStatusBackgroundColor(transaction.status),
-								height: 30,
-								paddingHorizontal: 2
+								height: 21,
+								paddingTop:  0,
+								borderColor: getStatusBackgroundColor(transaction.status),
 							}}
 						>
-							<Text style={{color: getStatusColor(transaction.status), fontSize: 10}}>
+							<Text style={{
+								color: getStatusColor(transaction.status),
+								fontSize: 10,
+								marginTop: 0,
+							}}>
 								{transaction.status || 'Unknown'}
 							</Text>
 						</Chip>
@@ -175,7 +180,7 @@ export default function TransactionsScreen() {
 
 						<View style={styles.transactionDetail}>
 							<Text style={{color: theme.colors.text, opacity: 0.7}}>Amount:</Text>
-							<Text style={{color: theme.colors.primary, fontWeight: 'bold'}}>
+							<Text style={{color: getStatusColor(transaction.status), fontWeight: 'bold'}}>
 								₦{(transaction.amount?.toFixed(2) || 0.00).toLocaleString("en-US")}
 							</Text>
 						</View>
@@ -189,8 +194,8 @@ export default function TransactionsScreen() {
 					</View>
 
 					<View style={styles.viewDetailsContainer}>
-						<Text style={{color: theme.colors.primary}}>View Details</Text>
-						<Ionicons name="chevron-forward" size={16} color={theme.colors.primary}/>
+						<Text style={{color: getStatusColor(transaction.status)}}>View Details</Text>
+						<Ionicons name="chevron-forward" size={16} color={getStatusColor(transaction.status)}/>
 					</View>
 				</TouchableOpacity>
 			))}

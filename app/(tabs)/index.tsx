@@ -56,7 +56,7 @@ export default function DashboardScreen() {
 	const getStatusColor = (status) => {
 		switch (status?.toLowerCase()) {
 			case 'completed':
-			case 'success':
+			case 'successful':
 				return theme.colors.success;
 			case 'pending':
 				return theme.colors.warning;
@@ -262,23 +262,26 @@ export default function DashboardScreen() {
 									style={{
 										color: getStatusColor(transaction.status),
 										fontWeight: 'bold',
-										paddingRight: 5
+										paddingRight: 2,
 									}}
 								>
 									₦{transaction.amount?.toFixed(2) || '0.00'}
 								</Text>
 								<Chip
 									style={{
-										backgroundColor: theme.colors.surface,
-										height: 30,
-										paddingHorizontal: 0,
-										paddingVertical: 0,
+										// backgroundColor: theme.colors.surface,
+										backgroundColor: getStatusBackgroundColor(transaction.status),
+										height: 21,
 										marginTop: 5,
 										borderColor: getStatusBackgroundColor(transaction.status),
-										border: '2px'
+										paddingTop:  0,
 									}}
 								>
-									<Text style={{color: getStatusColor(transaction.status), fontSize: 10}}>
+									<Text style={{
+										color: getStatusColor(transaction.status),
+										fontSize: 10,
+										marginTop: 0,
+									}}>
 										{transaction.status || 'Unknown'}
 									</Text>
 								</Chip>
@@ -340,7 +343,7 @@ const styles = StyleSheet.create({
 		marginBottom: 16,
 	},
 	chip: {
-		marginHorizontal: 4,
+		marginHorizontal: 5,
 	},
 	chart: {
 		marginVertical: 8,
