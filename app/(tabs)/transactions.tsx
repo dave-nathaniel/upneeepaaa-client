@@ -87,7 +87,7 @@ export default function TransactionsScreen() {
 	const getStatusBackgroundColor = (status) => {
 		switch (status?.toLowerCase()) {
 			case 'completed':
-			case 'success':
+			case 'successful':
 				return 'rgba(81, 207, 102, 0.2)';
 			case 'pending':
 				return 'rgba(252, 196, 25, 0.2)';
@@ -180,7 +180,7 @@ export default function TransactionsScreen() {
 
 						<View style={styles.transactionDetail}>
 							<Text style={{color: theme.colors.text, opacity: 0.7}}>Amount:</Text>
-							<Text style={{color: getStatusColor(transaction.status), fontWeight: 'bold'}}>
+							<Text style={{color: theme.colors.text, fontWeight: 'bold'}}>
 								₦{(transaction.amount?.toFixed(2) || 0.00).toLocaleString("en-US")}
 							</Text>
 						</View>

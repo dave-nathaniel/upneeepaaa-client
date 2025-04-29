@@ -6,18 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4c972a70-2b50-4851-9ff9-8fb8f37d11f9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(tabs)/transactions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/transactions.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/+not-found.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/+not-found.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/EditScreenInfo.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ExternalLink.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/StyledText.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Themed.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/__tests__/StyledText-test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/useClientOnlyValue.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/useClientOnlyValue.web.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/useColorScheme.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/useColorScheme.web.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +95,7 @@
       <updated>1745798401853</updated>
       <workItem from="1745798403182" duration="1686000" />
       <workItem from="1745800160720" duration="28120000" />
-      <workItem from="1745960308634" duration="2514000" />
+      <workItem from="1745960308634" duration="2675000" />
     </task>
     <servers />
   </component>
