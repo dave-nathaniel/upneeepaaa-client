@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c972a70-2b50-4851-9ff9-8fb8f37d11f9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/eas.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/transactions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/transactions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +27,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;dave-nathaniel&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/dave-nathaniel/upneeepaaa-client.git&quot;,
+    &quot;accountId&quot;: &quot;70b108e1-48f5-4ce9-b408-0f53f74e8b4c&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -60,7 +75,22 @@
     ]
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Shell Script.Expo Build iPhone">
+    <configuration name="Expo Build iPhone" type="ShConfigurationType">
+      <option name="SCRIPT_TEXT" value="eas build --platform ios --profile preview" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="false" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/../../../../../../../../Program Files/nodejs/npx" />
+      <option name="SCRIPT_OPTIONS" value="expo start" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="false" />
+      <option name="INTERPRETER_PATH" value="$PROJECT_DIR$/../../../../../../../../Program Files/nodejs/npx.cmd" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="false" />
+      <option name="EXECUTE_SCRIPT_FILE" value="false" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="Expo Start" type="ShConfigurationType">
       <option name="SCRIPT_TEXT" value="npx expo start" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="false" />
@@ -76,6 +106,10 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Shell Script.Expo Start" />
+      <item itemvalue="Shell Script.Expo Build iPhone" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -95,7 +129,9 @@
       <updated>1745798401853</updated>
       <workItem from="1745798403182" duration="1686000" />
       <workItem from="1745800160720" duration="28120000" />
-      <workItem from="1745960308634" duration="2675000" />
+      <workItem from="1745960308634" duration="2991000" />
+      <workItem from="1745963872419" duration="3863000" />
+      <workItem from="1746102112601" duration="3684000" />
     </task>
     <servers />
   </component>
@@ -105,6 +141,17 @@
       <list>
         <option value="$PROJECT_DIR$/src/context/AuthContext.jsx" />
       </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
     </option>
   </component>
 </project>
