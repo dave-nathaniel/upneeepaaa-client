@@ -9,6 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {},
+    "owner": "davenathaniel",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.davenathaniel.upneeepaaa",
