@@ -10,11 +10,70 @@ const getAuthToken = async () => {
 	return await SecureStore.getItemAsync('authToken');
 };
 
+// Helper function to get the refresh token from secure storage
+const getRefreshToken = async () => {
+	return await SecureStore.getItemAsync('refreshToken');
+};
+
+// Helper function to refresh the access token
+const refreshAccessToken = async () => {
+	try {
+		const refreshToken = await getRefreshToken();
+		if (!refreshToken) {
+			throw new Error('No refresh token available');
+		}
+
+		const tokenData = await authAPI.refreshToken(refreshToken);
+
+		// Store the new tokens
+		await SecureStore.setItemAsync('authToken', tokenData.token);
+		await SecureStore.setItemAsync('refreshToken', tokenData.refreshToken);
+
+		return tokenData.token;
+	} catch (error) {
+		console.error('Failed to refresh token:', error);
+		// Clear auth data on refresh failure
+		await SecureStore.deleteItemAsync('authToken');
+		await SecureStore.deleteItemAsync('refreshToken');
+		await SecureStore.deleteItemAsync('authUser');
+		// Redirect to login page
+		if (typeof window !== 'undefined') {
+			// For web
+			window.location.href = '/login';
+		} else {
+			// For React Native
+			const { router } = require('expo-router');
+			router.replace('/login');
+		}
+		throw error;
+	}
+};
+
 // Helper function to handle API responses
-const handleResponse = async (response) => {
+const handleResponse = async (response, retryRequest) => {
 	if (!response.ok) {
-		const error = await response.json();
-		throw new Error(error.message || 'Something went wrong');
+		// Check specifically for 401 Unauthorized error
+		const reply = await response.json();
+		const unauthorized_status = [401, 403];
+		// console.log('response', reply);
+		// console.log('status:', response.status);
+		// console.log('retryRequest', retryRequest);
+		// console.log('unauthorized_status.includes(response.status)', unauthorized_status.includes(response.status));
+		if (unauthorized_status.includes(response.status) || retryRequest) {
+			console.log('refreshing token');
+			try {
+				// Attempt to refresh the token
+				const newToken = await refreshAccessToken();
+				// Retry the original request with the new token
+				const retryResponse = await retryRequest(newToken);
+				return handleResponse(retryResponse, null); // Don't retry again to avoid infinite loops
+			} catch (refreshError) {
+				// If token refresh fails, throw the original error
+				const error = await response.json();
+				throw new Error(error.message || 'Authentication failed');
+			}
+		}
+		throw new Error(reply.message || 'Something went wrong');
 	}
 	const data = await response.json();
 	// Return the data property if it exists, otherwise return the entire response
@@ -119,7 +178,17 @@ export const billAPI = {
 				'Authorization': `Bearer ${token}`,
 			},
 		});
-		return handleResponse(response);
+
+		// Create a retry function that will be called if we get a 401
+		const retryFn = (newToken) => {
+			return fetch(`${API_BASE_URL}/bills/bill-categories`, {
+				headers: {
+					'Authorization': `Bearer ${newToken}`,
+				},
+			});
+		};
+
+		return handleResponse(response, retryFn);
 	},
 
 	getBillers: async (categorySlug) => {
@@ -129,7 +198,17 @@ export const billAPI = {
 				'Authorization': `Bearer ${token}`,
 			},
 		});
-		return handleResponse(response);
+
+		// Create a retry function that will be called if we get a 401
+		const retryFn = (newToken) => {
+			return fetch(`${API_BASE_URL}/bills/billers?category=${categorySlug}`, {
+				headers: {
+					'Authorization': `Bearer ${newToken}`,
+				},
+			});
+		};
+
+		return handleResponse(response, retryFn);
 	},
 
 	getPackages: async (billerSlug) => {
@@ -139,7 +218,17 @@ export const billAPI = {
 				'Authorization': `Bearer ${token}`,
 			},
 		});
-		return handleResponse(response);
+
+		// Create a retry function that will be called if we get a 401
+		const retryFn = (newToken) => {
+			return fetch(`${API_BASE_URL}/bills/bill-items/${billerSlug}`, {
+				headers: {
+					'Authorization': `Bearer ${newToken}`,
+				},
+			});
+		};
+
+		return handleResponse(response, retryFn);
 	},
 
 	verifyCustomer: async (data) => {
@@ -156,7 +245,24 @@ export const billAPI = {
 				customer_id: data.accountNumber
 			}),
 		});
-		return handleResponse(response);
+
+		// Create a retry function that will be called if we get a 401
+		const retryFn = (newToken) => {
+			return fetch(`${API_BASE_URL}/bills/validate-customer`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${newToken}`,
+				},
+				body: JSON.stringify({
+					biller_id: data.billerId,
+					item_id: data.packageId,
+					customer_id: data.accountNumber
+				}),
+			});
+		};
+
+		return handleResponse(response, retryFn);
 	},
 };
 
