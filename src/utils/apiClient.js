@@ -51,14 +51,19 @@ const refreshAccessToken = async () => {
 
 // Helper function to handle API responses
 const handleResponse = async (response, retryRequest) => {
-
 	if (!response.ok) {
 		// Check specifically for 401 Unauthorized error
-		if (response.status === 401 && retryRequest) {
+		const reply = await response.json();
+		const unauthorized_status = [401, 403];
+		// console.log('response', reply);
+		// console.log('status:', response.status);
+		// console.log('retryRequest', retryRequest);
+		// console.log('unauthorized_status.includes(response.status)', unauthorized_status.includes(response.status));
+		if (unauthorized_status.includes(response.status) || retryRequest) {
+			console.log('refreshing token');
 			try {
 				// Attempt to refresh the token
 				const newToken = await refreshAccessToken();
-
 				// Retry the original request with the new token
 				const retryResponse = await retryRequest(newToken);
 				return handleResponse(retryResponse, null); // Don't retry again to avoid infinite loops
@@ -68,9 +73,7 @@ const handleResponse = async (response, retryRequest) => {
 				throw new Error(error.message || 'Authentication failed');
 			}
 		}
-
-		const error = await response.json();
-		throw new Error(error.message || 'Something went wrong');
+		throw new Error(reply.message || 'Something went wrong');
 	}
 	const data = await response.json();
 	// Return the data property if it exists, otherwise return the entire response
